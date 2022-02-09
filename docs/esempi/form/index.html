@@ -3,35 +3,41 @@ layout: base
 title: Form
 ---
 
-<div class="container mt-5 mb-5">
-  <form class="needs-validation" action="#" novalidate>
+<div class="container mt-5 mb-5 pt-5">
+  <div class="row">
+    <div class="col-12 mb-5">
+      <h1>Test accessibilità e validazione form</h1>
+    </div>
+  </div>
+  <form class="needs-validation mb-5" action="#" novalidate>
     <div class="form-row">
-      <div class="form-group col-md-3 mb-5">
+      <div class="form-group col-md-4 mb-5">
         <label for="nome">Nome</label>
         <input type="text" class="form-control" id="nome" required>
         <div class="valid-feedback">Validato!</div>
         <div class="invalid-feedback">Non Validato!</div>
       </div>
-      <div class="form-group col-md-3 mb-5">
+      <div class="form-group col-md-4 mb-5">
         <label for="cognome">Cognome</label>
         <input type="text" class="form-control" id="cognome" required>
         <div class="valid-feedback">Validato!</div>
         <div class="invalid-feedback">Non Validato!</div>
       </div>
-      <div class="form-group col-md-3 mb-5">
+      <div class="form-group col-md-4 mb-5">
         <label for="pass">Password</label>
         <input type="password" class="form-control" id="pass" required>
         <div class="valid-feedback">Validato!</div>
         <div class="invalid-feedback">Non Validato!</div>
       </div>
-      <div class="form-group col-md-3 mb-5">
+
+    </div>
+    <div class="form-row">
+			<div class="form-group col-md-4 mb-5">
         <label for="validationAge">Età</label>
         <input type="number" class="form-control" id="validationAge" min="18" step="1" required>
         <div class="valid-feedback">Validato!</div>
         <div class="invalid-feedback">Utilizza un numero valido maggiore di 18</div>
       </div>
-    </div>
-    <div class="form-row">
       <div class="form-group col-md-4 mb-5">
         <label for="tel">Telefono</label>
         <input type="tel" class="form-control" id="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
@@ -44,30 +50,101 @@ title: Form
         <div class="valid-feedback">Validato!</div>
         <div class="invalid-feedback">Non valido</div>
       </div>
-      <div class="form-group col-md-4 mb-5">
+
+    </div>
+    <div class="form-row">
+			<div class="form-group col-md-4">
         <label for="validationCustom05">CAP</label>
         <input type="text" class="form-control" id="validationCustom05" required>
         <div class="invalid-feedback">Per favore inserisci un CAP valido.</div>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-4 mb-5">
+      <div class="form-group col-md-4">
         <label class="active" for="ora">Ora</label>
         <input type="time" class="form-control" id="ora" min="09:00" max="23:00" required>
         <div class="valid-feedback">Validato!</div>
         <div class="invalid-feedback">Non valido</div>
       </div>
-      <div class="it-datepicker-wrapper col-md-4 mb-5">
+      <div class="it-datepicker-wrapper col-md-4">
         <div class="form-group">
-          <label for="date1">Date label</label>
+          <label for="date1">Data</label>
           <input class="form-control it-date-datepicker" id="date1" type="text" placeholder="inserisci la data in formato gg/mm/aaaa" required/>
           <div class="valid-feedback">Validato!</div>
           <div class="invalid-feedback">Non valido</div>
         </div>
       </div>
     </div>
+		<div class="form-row">
+      <div class="form-group col-md-4 mb-5">
+        <div class="bootstrap-select-wrapper">
+          <label for="selectExample1">Select Custom</label>
+          <select id="selectExample1" title="Scegli una opzione" required>
+            <option value="" selected>Scegli una opzione</option>
+            <option value="Value 1">Opzione 1</option>
+            <option value="Value 2">Opzione 2</option>
+            <option value="Value 3">Opzione 3</option>
+            <option value="Value 4">Opzione 4</option>
+            <option value="Value 5">Opzione 5</option>
+          </select>
+          <div class="valid-feedback">Validato!</div>
+          <div class="invalid-feedback">Non validato</div>
+        </div>
+      </div>
+      <div class="form-group col-md-4 mb-5">
+        <div class="bootstrap-select-wrapper">
+          <label for="selectExample4">Select Custom con ricerca</label>
+          <select id="selectExample4" title="Scegli una opzione" data-live-search="true" data-live-search-placeholder="Cerca opzioni" required>
+            <option value="" selected>Scegli una opzione</option>
+            <option value="1">Lorem ipsum dolor sit amet</option>
+            <option value="2">Duis vestibulum eleifend libero</option>
+            <option value="3">Phasellus pretium orci sed odio tempus</option>
+            <option value="4">Vestibulum bibendum ex vel augue porttitor sodales</option>
+            <option value="5">Praesent quis elementum turpis</option>
+          </select>
+          <div class="valid-feedback">Validato!</div>
+          <div class="invalid-feedback">Non validato</div>
+        </div>
+      </div>
+			<div class="form-group col-md-4 mb-5">
+        <div class="bootstrap-select-wrapper">
+					<div class="bootstrap-select-wrapper">
+						<label for="selectExample5">Select Custom multipla</label>
+						<select id="selectExample5" title="Scegli una opzione" multiple data-multiple-separator="" required>
+							<option value="1" data-content="<span class='select-pill'><span class='select-pill-text'>Opzione 1</span></span>">Opzione</option>
+							<option value="2" data-content="<span class='select-pill'><span class='select-pill-text'>Opzione 2</span></span>">Opzione</option>
+							<option value="3" data-content="<span class='select-pill'><span class='select-pill-text'>Opzione 3</span></span>">Opzione</option>
+							<option value="4" data-content="<span class='select-pill'><span class='select-pill-text'>Opzione 4</span></span>">Opzione</option>
+						</select>
+						<div class="valid-feedback">Validato!</div>
+						<div class="invalid-feedback">Non validato</div>
+					</div>
+        </div>
+      </div>
+    </div>
     <div class="form-row">
-      <div class="form-group col-md-6 mb-5">
+      <div class="form-group col-md-4 mb-5">
+				<label class="active" for="defaultSelect">Select standard</label>
+				<select style="width:100%" id="defaultSelect" title="Scegli una opzione" required>
+					<option value="" selected>Scegli una opzione</option>
+					<option value="Value 1">Opzione 1</option>
+					<option value="Value 2">Opzione 2</option>
+					<option value="Value 3">Opzione 3</option>
+					<option value="Value 4">Opzione 4</option>
+					<option value="Value 5">Opzione 5</option>
+				</select>
+				<div class="valid-feedback">Validato!</div>
+				<div class="invalid-feedback">Non validato</div>
+      </div>
+			<div class="form-group col-md-8 mb-5">
+        <label for="exampleFormControlTextarea1">Area di testo</label>
+        <textarea id="exampleFormControlTextarea1" rows="3" required></textarea>
+        <div class="valid-feedback">Validato!</div>
+        <div class="invalid-feedback">Non validato</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4 mb-2">
+				<p>Radio button</p>
         <div class="form-check form-check-inline">
           <input name="gruppo2" type="radio" id="radio4" required>
           <label for="radio4">Opzione 1</label>
@@ -81,7 +158,8 @@ title: Form
           <div class="invalid-feedback">Scegliere un'opzione</div>
         </div>
       </div>
-      <div class="form-group col-md-6 mb-5">
+      <div class="form-group col-md-3 mb-2">
+				<p>Radio button</p>
         <div class="form-check form-check-group">
           <input name="gruppo4" type="radio" id="radio10" required>
           <label for="radio10">Opzione 1</label>
@@ -101,91 +179,28 @@ title: Form
           <div class="invalid-feedback">Scegliere un'opzione</div>
         </div>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-4 mb-5">
-        <label class="active" for="defaultSelect">Select standard</label>
-        <select style="width:100%" id="defaultSelect" title="Scegli una opzione" required>
-          <option value="" selected>Select your option</option>
-          <option value="Value 1">Opzione 1</option>
-          <option value="Value 2">Opzione 2</option>
-          <option value="Value 3">Opzione 3</option>
-          <option value="Value 4">Opzione 4</option>
-          <option value="Value 5">Opzione 5</option>
-        </select>
-        <div class="valid-feedback">Validato!</div>
-        <div class="invalid-feedback">Non validato</div>
-      </div>
-      <div class="form-group col-md-4 mb-5">
-        <div class="bootstrap-select-wrapper">
-          <label for="selectExample1">Custom select</label>
-          <select id="selectExample1" title="Scegli una opzione" required>
-            <option value="" selected>Select your option</option>
-            <option value="Value 1">Opzione 1</option>
-            <option value="Value 2">Opzione 2</option>
-            <option value="Value 3">Opzione 3</option>
-            <option value="Value 4">Opzione 4</option>
-            <option value="Value 5">Opzione 5</option>
-          </select>
-          <div class="valid-feedback">Validato!</div>
-          <div class="invalid-feedback">Non validato</div>
+      <div class="col-md-4 offset-md-1 mb-2">
+				<p>Check box</p>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+          <label class="form-check-label" for="invalidCheck">Accetto i termini e le condizioni.</label>
+          <div class="invalid-feedback">Devi accettare i termini e le condizioni prima di inviare il modulo.</div>
         </div>
-      </div>
-      <div class="form-group col-md-4 mb-5">
-        <div class="bootstrap-select-wrapper">
-          <label for="selectExample4">Etichetta</label>
-          <select id="selectExample4" title="Scegli una opzione" data-live-search="true" data-live-search-placeholder="Cerca opzioni" required>
-            <option value="" selected>Select your option</option>
-            <option value="1">Lorem ipsum dolor sit amet</option>
-            <option value="2">Duis vestibulum eleifend libero</option>
-            <option value="3">Phasellus pretium orci sed odio tempus</option>
-            <option value="4">Vestibulum bibendum ex vel augue porttitor sodales</option>
-            <option value="5">Praesent quis elementum turpis</option>
-          </select>
-          <div class="valid-feedback">Validato!</div>
-          <div class="invalid-feedback">Non validato</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="check2" required>
+          <label class="form-check-label" for="check2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+          <div class="invalid-feedback">Devi accettare i termini e le condizioni prima di inviare il modulo.</div>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="check3" required>
+          <label class="form-check-label" for="check3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+          <div class="invalid-feedback">Devi accettare i termini e le condizioni prima di inviare il modulo.</div>
         </div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-4 mb-5">
-        <div class="bootstrap-select-wrapper">
-          <label for="selectExample5">Etichetta</label>
-          <select id="selectExample5" title="Scegli una opzione" multiple data-multiple-separator="" required>
-            <option value="1" data-content="<span class='select-pill'><span class='select-pill-text'>Opzione 1</span></span>">Opzione</option>
-            <option value="2" data-content="<span class='select-pill'><span class='select-pill-text'>Opzione 2</span></span>">Opzione</option>
-            <option value="3" data-content="<span class='select-pill'><span class='select-pill-text'>Opzione 3</span></span>">Opzione</option>
-            <option value="4" data-content="<span class='select-pill'><span class='select-pill-text'>Opzione 4</span></span>">Opzione</option>
-          </select>
-          <div class="valid-feedback">Validato!</div>
-          <div class="invalid-feedback">Non validato</div>
-        </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6 mb-5">
-        <label for="exampleFormControlTextarea1">Esempio di area di testo</label>
-        <textarea id="exampleFormControlTextarea1" rows="3" required></textarea>
-        <div class="valid-feedback">Validato!</div>
-        <div class="invalid-feedback">Non validato</div>
-      </div>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-      <label class="form-check-label" for="invalidCheck">Accetto i termini e le condizioni.</label>
-      <div class="invalid-feedback">Devi accettare i termini e le condizioni prima di inviare il modulo.</div>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="check2" required>
-      <label class="form-check-label" for="check2">Accetto i termini e le condizioni.</label>
-      <div class="invalid-feedback">Devi accettare i termini e le condizioni prima di inviare il modulo.</div>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="check3" required>
-      <label class="form-check-label" for="check3">Accetto i termini e le condizioni.</label>
-      <div class="invalid-feedback">Devi accettare i termini e le condizioni prima di inviare il modulo.</div>
-    </div>
-    <button class="btn btn-primary mt-3" type="submit">Invia</button>
+
+    <button class="btn btn-primary mt-3 float-right" type="submit">Invia (test validazione)</button>
+    <div class="clearfix"></div>
   </form>
 </div>
 <script>
