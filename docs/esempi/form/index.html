@@ -1,0 +1,91 @@
+---
+layout: base
+title: Form
+---
+<form class="needs-validation mt-5 mb-5" id="formTest" method="post" action="#" novalidate>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" class="form-control" id="nome" required>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label for="validationAge">Età</label>
+          <input type="number" class="form-control" id="validationAge" value="18" min="18" step="1" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary mt-3" type="submit">Invia</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+  var formFeedback = '<div class="feedback" aria-describedby="nome"></div>'
+  //string to html
+  var stringToHTML = function (str) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(str, 'text/html');
+    return doc.body.firstChild;
+  };
+  //single input check
+  function checkInput( form ){
+    var inputs = form.querySelectorAll("input,select,textarea,fieldset");
+    Array.from(inputs).forEach(el => {
+      createAlert( el )
+    })
+  }
+
+  //check error type
+  function checkErrorType(el,message){
+
+  }
+
+  //message alert creation
+  function createAlert( el ){
+    var id = el.getAttribute('id');
+    var formFeedback = stringToHTML('<div class="feedback" aria-describedby="'+id+'"></div>')
+    var message
+    var presentMessage = el.nextElementSibling;
+    if( el.validity.valueMissing ) {
+      message = 'Campo obbligatorio'
+      if (!el.nextElementSibling){
+        el.after(formFeedback)
+      }else{
+        console.log(presentMessage.innerHTML)
+        if ( presentMessage.innerHTML !== message) {
+          presentMessage.insertAdjacentHTML( 'beforeend', message );
+        }
+      }
+    }else if( el.validity.rangeUnderflow ) {
+      message = '<span>Valore inferiore al minimo consentito</span>'
+      if (!el.nextElementSibling){
+        el.after(formFeedback)
+      }else{
+        console.log(presentMessage.innerHTML)
+        if ( presentMessage.innerHTML !== message) {
+          presentMessage.insertAdjacentHTML( 'beforeend', message );
+        }
+      }
+    }
+    formFeedback.insertAdjacentHTML( 'beforeend', message );
+  }
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+          checkInput(form)
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+</script>
