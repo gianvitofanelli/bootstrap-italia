@@ -17,6 +17,59 @@ title: Form
           <input type="number" class="form-control" id="validationAge" value="18" min="18" max="20" step="1" required>
         </div>
       </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label for="cap">Cap</label>
+          <input type="text" class="form-control" id="cap" pattern="[0-9]{5}" required>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label class="active" for="defaultSelect">Etichetta</label>
+          <select id="defaultSelect" title="Scegli una opzione" required>
+            <option value="" selected>Scegli un'opzione</option>
+            <option value="Value 1">Opzione 1</option>
+            <option value="Value 2">Opzione 2</option>
+            <option value="Value 3">Opzione 3</option>
+            <option value="Value 4">Opzione 4</option>
+            <option value="Value 5">Opzione 5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <fieldset id="radiogroup">
+        <legend>Seleziona un'opzione</legend>
+        <div class="form-check">
+          <input name="gruppo1" type="radio" id="radio1">
+          <label for="radio1">Radio di esempio 1</label>
+        </div>
+        <div class="form-check">
+          <input name="gruppo1" type="radio" id="radio2" required>
+          <label for="radio2">Radio di esempio 2</label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="row">
+      <fieldset id="checkgroup">
+        <legend>Seleziona un'opzione</legend>
+        <div class="form-check">
+          <input name="gruppo2" type="checkbox" id="check1" required>
+          <label for="check1">Checkbox di esempio 1</label>
+        </div>
+        <div class="form-check">
+          <input name="gruppo2" type="checkbox" id="check2" required>
+          <label for="check2">Checkbox di esempio 2</label>
+        </div>
+      </fieldset>
     </div>
     <div class="row">
       <button class="btn btn-primary mt-3" type="submit">Invia</button>
@@ -28,12 +81,14 @@ title: Form
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
   var formFeedback = '<div class="feedback" aria-describedby="nome"></div>'
+
   //string to html
   var stringToHTML = function (str) {
     var parser = new DOMParser();
     var doc = parser.parseFromString(str, 'text/html');
     return doc.body.firstChild;
   };
+
   //single input check
   function checkInput( form ){
     var inputs = form.querySelectorAll("input,select,textarea,fieldset");
@@ -44,7 +99,7 @@ title: Form
   }
 
   //check error type
-  function checkErrorType(el,formFeedback,messages,message){
+  function checkErrorType(el,formFeedback,message){
     var presentMessage = el.nextElementSibling;
     if (!el.nextElementSibling){
       el.after(formFeedback)
@@ -64,50 +119,113 @@ title: Form
     var id = el.getAttribute('id');
     var formFeedback = stringToHTML('<div class="feedback" aria-describedby="'+id+'"></div>')
     var toRemove
+    var css
+    var message
+    var messageString
+    var min
+    var max
     var messages = {
-      mandatory : '<span class="mandatory">Campo obbligatorio</span>',
-      underflow : '<span class="underflow">Valore inferiore al minimo consentito</span>',
-      overflow : '<span class="overflow">Valore superiore al massimo consentito</span>'
+      mandatory : {
+        msg : "Campo obbligatorio",
+        css : "mandatory"
+      },
+      underflow : {
+        msg : "Valore inferiore al minimo consentito",
+        css : "underflow"
+      },
+      overflow : {
+        msg : "Valore superiore al massimo consentito",
+        css : "overflow"
+      },
+      type : {
+        msg : "Tipo di dato non corretto",
+        css : "type-mismatch"
+      },
+      pattern : {
+        msg : "Tipo di dato con formato non corretto",
+        css : "pattern-mismatch"
+      }
     }
     var message
+    //-valore non inserito
     if( el.validity.valueMissing ) {
-      message = messages.mandatory
-      checkErrorType(el,formFeedback,messages,message)
+      message = messages.mandatory.msg
+      css = messages.mandatory.css
+      messageString = '<span class="'+css+'">'+message+'</span>'
+      checkErrorType(el,formFeedback,messageString)
     }else{
       var element = document.getElementById(id);
       if (element.nextElementSibling){
-        toRemove = element.nextElementSibling.querySelector('.mandatory')
+        toRemove = element.nextElementSibling.querySelector('.'+messages.mandatory.css)
         if (toRemove){
           toRemove.remove()
         }
       }
     }
+    //-valore inferiore al richiesto
     if( el.validity.rangeUnderflow ) {
-      message = messages.underflow
-      checkErrorType(el,formFeedback,messages,message)
+      message = messages.underflow.msg
+      css = messages.underflow.css
+      min = el.getAttribute('min');
+      messageString = '<span class="'+css+'">'+message+' ('+min+')</span>'
+      checkErrorType(el,formFeedback,messageString)
     }else{
       var element = document.getElementById(id);
       if (element.nextElementSibling){
-        toRemove = element.nextElementSibling.querySelector('.underflow')
+        toRemove = element.nextElementSibling.querySelector('.'+messages.underflow.css)
         if (toRemove){
           toRemove.remove()
         }
       }
     }
+    //-valore superiore al richiesto
     if( el.validity.rangeOverflow ) {
-      message = messages.overflow
-      checkErrorType(el,formFeedback,messages,message)
+      message = messages.overflow.msg
+      css = messages.overflow.css
+      max = el.getAttribute('max');
+      messageString = '<span class="'+css+'">'+message+' ('+max+')</span>'
+      checkErrorType(el,formFeedback,messageString)
     }else{
       var element = document.getElementById(id);
       if (element.nextElementSibling){
-        toRemove = element.nextElementSibling.querySelector('.overflow')
+        toRemove = element.nextElementSibling.querySelector('.'+messages.overflow.css)
+        if (toRemove){
+          toRemove.remove()
+        }
+      }
+    }
+    //-valore non rispetta il tipo di campo
+    if( el.validity.typeMismatch ) {
+      message = messages.type.msg
+      css = messages.type.css
+      messageString = '<span class="'+css+'">'+message+'</span>'
+      checkErrorType(el,formFeedback,messageString)
+    }else{
+      var element = document.getElementById(id);
+      if (element.nextElementSibling){
+        toRemove = element.nextElementSibling.querySelector('.'+messages.type.css)
+        if (toRemove){
+          toRemove.remove()
+        }
+      }
+    }
+    //-valore non rispetta il pattern
+    if( el.validity.patternMismatch ) {
+      message = messages.pattern.msg
+      css = messages.pattern.css
+      messageString = '<span class="'+css+'">'+message+'</span>'
+      checkErrorType(el,formFeedback,messageString)
+    }else{
+      var element = document.getElementById(id);
+      if (element.nextElementSibling){
+        toRemove = element.nextElementSibling.querySelector('.'+messages.pattern.css)
         if (toRemove){
           toRemove.remove()
         }
       }
     }
 
-    formFeedback.insertAdjacentHTML( 'beforeend', message );
+    formFeedback.insertAdjacentHTML( 'beforeend', messageString );
   }
   // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
